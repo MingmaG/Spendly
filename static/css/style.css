@@ -526,6 +526,137 @@ a { color: inherit; text-decoration: none; }
 .auth-switch a:hover { text-decoration: underline; }
 
 /* ------------------------------------------------------------------ */
+/* Profile page                                                        */
+/* ------------------------------------------------------------------ */
+
+.profile-section {
+    padding: 3rem 2rem 4rem;
+}
+
+.profile-container {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.profile-header-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-name {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+}
+
+.profile-email {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    margin-bottom: 0.2rem;
+}
+
+.profile-meta {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+}
+
+.transactions-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transactions-table th {
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.transactions-table td {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.transactions-table tr:last-child td {
+    border-bottom: none;
+}
+
+.category-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.category-badge-food { background: var(--accent-2-light); color: var(--accent-2); }
+.category-badge-transport { background: #e8effd; color: #4f86f7; }
+.category-badge-bills { background: #efebfd; color: #8b7cf0; }
+.category-badge-entertainment { background: #fbe9ef; color: #d1568a; }
+.category-badge-shopping { background: var(--accent-light); color: var(--accent); }
+
+.bar-fill-transport { background: #4f86f7; }
+.bar-fill-entertainment { background: #d1568a; }
+.bar-fill-shopping { background: var(--accent); }
+
+.bar-w-10 { width: 10%; }
+.bar-w-20 { width: 20%; }
+.bar-w-30 { width: 30%; }
+.bar-w-40 { width: 40%; }
+.bar-w-50 { width: 50%; }
+.bar-w-60 { width: 60%; }
+.bar-w-70 { width: 70%; }
+.bar-w-80 { width: 80%; }
+.bar-w-90 { width: 90%; }
+.bar-w-100 { width: 100%; }
+
+/* ------------------------------------------------------------------ */
 /* Footer                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -660,6 +791,8 @@ a { color: inherit; text-decoration: none; }
     .stats-row { grid-template-columns: 1fr; }
 
     .features-inner { grid-template-columns: 1fr; }
+
+    .profile-header-card { flex-direction: column; text-align: center; }
 }
 
 @media (max-width: 600px) {
