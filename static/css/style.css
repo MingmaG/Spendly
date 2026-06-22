@@ -253,6 +253,7 @@ a { color: inherit; text-decoration: none; }
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--ink);
+    font-variant-numeric: tabular-nums;
 }
 
 .stat-change {
@@ -541,6 +542,12 @@ a { color: inherit; text-decoration: none; }
     gap: 1.5rem;
 }
 
+.profile-container .stat-card,
+.profile-container .bars-card {
+    border: 1px solid var(--border-soft);
+    box-shadow: 0 1px 2px rgba(15, 15, 15, 0.04), 0 2px 6px rgba(15, 15, 15, 0.05);
+}
+
 .profile-header-card {
     background: var(--paper-card);
     border: 1px solid var(--border);
@@ -549,6 +556,7 @@ a { color: inherit; text-decoration: none; }
     display: flex;
     align-items: center;
     gap: 1.25rem;
+    box-shadow: 0 1px 2px rgba(15, 15, 15, 0.04), 0 2px 6px rgba(15, 15, 15, 0.05);
 }
 
 .profile-avatar {
@@ -570,13 +578,13 @@ a { color: inherit; text-decoration: none; }
     font-family: var(--font-display);
     font-size: 1.4rem;
     color: var(--ink);
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.25rem;
 }
 
 .profile-email {
     font-size: 0.9rem;
     color: var(--ink-muted);
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.25rem;
 }
 
 .profile-meta {
@@ -597,10 +605,12 @@ a { color: inherit; text-decoration: none; }
     border-radius: var(--radius-md);
     padding: 1.5rem;
     overflow-x: auto;
+    box-shadow: 0 1px 2px rgba(15, 15, 15, 0.04), 0 2px 6px rgba(15, 15, 15, 0.05);
 }
 
 .transactions-table {
     width: 100%;
+    min-width: 480px;
     border-collapse: collapse;
 }
 
@@ -611,7 +621,7 @@ a { color: inherit; text-decoration: none; }
     color: var(--ink-faint);
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    padding: 0.6rem 0.75rem;
+    padding: 0.5rem 0.75rem;
     border-bottom: 1px solid var(--border);
 }
 
@@ -626,6 +636,15 @@ a { color: inherit; text-decoration: none; }
     border-bottom: none;
 }
 
+.transactions-table tbody tr:hover {
+    background: var(--paper-warm);
+}
+
+.amount-cell {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
 .category-badge {
     display: inline-flex;
     align-items: center;
@@ -636,13 +655,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 .category-badge-food { background: var(--accent-2-light); color: var(--accent-2); }
-.category-badge-transport { background: #e8effd; color: #4f86f7; }
-.category-badge-bills { background: #efebfd; color: #8b7cf0; }
-.category-badge-entertainment { background: #fbe9ef; color: #d1568a; }
+.category-badge-transport { background: #e9f0ee; color: #5b7a73; }
+.category-badge-bills { background: #f1e9f4; color: #7d5a87; }
+.category-badge-entertainment { background: #f8e9ee; color: #a8526b; }
 .category-badge-shopping { background: var(--accent-light); color: var(--accent); }
 
-.bar-fill-transport { background: #4f86f7; }
-.bar-fill-entertainment { background: #d1568a; }
+.bar-fill-transport { background: #5b7a73; }
+.bar-fill-entertainment { background: #a8526b; }
 .bar-fill-shopping { background: var(--accent); }
 
 .bar-w-10 { width: 10%; }
