@@ -1,7 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from database.db import get_db, init_db, seed_db, get_user_by_email, create_user
+from database.db import (
+    get_db,
+    init_db,
+    seed_db,
+    get_user_by_email,
+    get_user_by_id,
+    create_user,
+)
 
 app = Flask(__name__)
 app.secret_key = "dev-secret-key"
@@ -9,6 +16,12 @@ app.secret_key = "dev-secret-key"
 with app.app_context():
     init_db()
     seed_db()
+
+
+@app.context_processor
+def inject_current_user():
+    user_id = session.get("user_id")
+    return {"current_user": get_user_by_id(user_id) if user_id else None}
 
 
 # ------------------------------------------------------------------ #
@@ -22,6 +35,9 @@ def landing():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if session.get("user_id"):
+        return redirect(url_for("profile"))
+
     if request.method == "GET":
         return render_template("register.html")
 
@@ -57,6 +73,9 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if session.get("user_id"):
+        return redirect(url_for("profile"))
+
     if request.method == "GET":
         return render_template("login.html")
 
@@ -73,6 +92,12 @@ def login():
     return redirect(url_for("profile"))
 
 
+@app.route("/logout")
+def logout():
+    session.pop("user_id", None)
+    return redirect(url_for("landing"))
+
+
 @app.route("/terms")
 def terms():
     return render_template("terms.html")
@@ -86,11 +111,6 @@ def privacy():
 # ------------------------------------------------------------------ #
 # Placeholder routes — students will implement these                  #
 # ------------------------------------------------------------------ #
-
-@app.route("/logout")
-def logout():
-    return "Logout — coming in Step 3"
-
 
 @app.route("/profile")
 def profile():
