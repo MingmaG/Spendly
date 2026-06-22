@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -108,14 +110,49 @@ def privacy():
     return render_template("privacy.html")
 
 
+@app.route("/profile")
+def profile():
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
+
+    user = get_user_by_id(session["user_id"])
+    initials = user["name"][0].upper()
+    member_since = datetime.strptime(
+        user["created_at"], "%Y-%m-%d %H:%M:%S"
+    ).strftime("%B %Y")
+
+    transactions = [
+        {"date": "Jun 18, 2026", "description": "Grocery shopping", "category": "Food", "amount": 45.50},
+        {"date": "Jun 15, 2026", "description": "Bus pass top-up", "category": "Transport", "amount": 12.00},
+        {"date": "Jun 12, 2026", "description": "Electricity bill", "category": "Bills", "amount": 89.99},
+        {"date": "Jun 10, 2026", "description": "Movie night", "category": "Entertainment", "amount": 60.00},
+        {"date": "Jun 07, 2026", "description": "New shoes", "category": "Shopping", "amount": 150.00},
+    ]
+    summary = {
+        "total_spent": sum(tx["amount"] for tx in transactions),
+        "transaction_count": len(transactions),
+        "top_category": "Shopping",
+    }
+    category_breakdown = [
+        {"name": "Shopping", "percent": 40},
+        {"name": "Bills", "percent": 30},
+        {"name": "Entertainment", "percent": 20},
+        {"name": "Food", "percent": 10},
+    ]
+
+    return render_template(
+        "profile.html",
+        initials=initials,
+        member_since=member_since,
+        transactions=transactions,
+        summary=summary,
+        category_breakdown=category_breakdown,
+    )
+
+
 # ------------------------------------------------------------------ #
 # Placeholder routes — students will implement these                  #
 # ------------------------------------------------------------------ #
-
-@app.route("/profile")
-def profile():
-    return "Profile page — coming in Step 4"
-
 
 @app.route("/expenses/add")
 def add_expense():
