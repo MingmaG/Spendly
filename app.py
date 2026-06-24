@@ -11,6 +11,11 @@ from database.db import (
     get_user_by_id,
     create_user,
 )
+from database.queries import (
+    get_recent_transactions,
+    get_summary_stats,
+    get_category_breakdown,
+)
 
 app = Flask(__name__)
 app.secret_key = "dev-secret-key"
@@ -121,24 +126,9 @@ def profile():
         user["created_at"], "%Y-%m-%d %H:%M:%S"
     ).strftime("%B %Y")
 
-    transactions = [
-        {"date": "Jun 18, 2026", "description": "Grocery shopping", "category": "Food", "amount": 45.50},
-        {"date": "Jun 15, 2026", "description": "Bus pass top-up", "category": "Transport", "amount": 12.00},
-        {"date": "Jun 12, 2026", "description": "Electricity bill", "category": "Bills", "amount": 89.99},
-        {"date": "Jun 10, 2026", "description": "Movie night", "category": "Entertainment", "amount": 60.00},
-        {"date": "Jun 07, 2026", "description": "New shoes", "category": "Shopping", "amount": 150.00},
-    ]
-    summary = {
-        "total_spent": sum(tx["amount"] for tx in transactions),
-        "transaction_count": len(transactions),
-        "top_category": "Shopping",
-    }
-    category_breakdown = [
-        {"name": "Shopping", "percent": 40},
-        {"name": "Bills", "percent": 30},
-        {"name": "Entertainment", "percent": 20},
-        {"name": "Food", "percent": 10},
-    ]
+    transactions = get_recent_transactions(session["user_id"])
+    summary = get_summary_stats(session["user_id"])
+    category_breakdown = get_category_breakdown(session["user_id"])
 
     return render_template(
         "profile.html",
